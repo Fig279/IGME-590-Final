@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://ok1ik5xtxs4p"]
+
+[ext_resource type="Script" uid="uid://cxeahpegwvslr" path="res://Scripts/asset.gd" id="1_cimjh"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_nwdoh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lqecs"]
+
+[node name="Box" type="StaticBody3D"]
+script = ExtResource("1_cimjh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.228509, 0)
+mesh = SubResource("BoxMesh_nwdoh")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0146084, -0.178041, 0.0382595)
+shape = SubResource("BoxShape3D_lqecs")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.17111, 0)
+billboard = 1
+text = "Element will display here"
+font_size = 100
+outline_size = 20

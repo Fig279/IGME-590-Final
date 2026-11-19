@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bvyo6h671jvl0"]
+
+[ext_resource type="Texture2D" uid="uid://hoh7ws42wdo4" path="res://Items/Sprites/tall_hornet.png" id="1_a5ngf"]
+[ext_resource type="Script" uid="uid://d2k544ve34g6b" path="res://Items/inventory_item.gd" id="2_81lho"]
+
+[node name="InventoryItem" type="TextureRect" unique_id=451849844]
+visibility_layer = 2
+z_index = 2
+z_as_relative = false
+texture_filter = 1
+custom_minimum_size = Vector2(70, 140)
+custom_maximum_size = Vector2(70, 140)
+offset_right = 100.0
+offset_bottom = 200.0
+mouse_filter = 2
+texture = ExtResource("1_a5ngf")
+script = ExtResource("2_81lho")
+shapeCells = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 1)])

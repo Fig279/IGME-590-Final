@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bragbefen48vp"]
+
+[ext_resource type="Texture2D" uid="uid://b6iyx6la5ai2m" path="res://GridInventory/slot.png" id="1_s7a6t"]
+[ext_resource type="Script" uid="uid://kb47hxgn13c0" path="res://GridInventory/grid_spot.gd" id="2_oyrrw"]
+
+[node name="GridSpot" type="TextureRect" unique_id=606662706]
+texture_filter = 1
+custom_minimum_size = Vector2(100, 100)
+custom_maximum_size = Vector2(100, 100)
+anchors_preset = -1
+anchor_right = 0.11100001
+anchor_bottom = 0.19800001
+offset_right = 0.12799072
+offset_bottom = -0.3040161
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("1_s7a6t")
+expand_mode = 1
+script = ExtResource("2_oyrrw")

@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cbd0u258mdnjk"]
+
+[ext_resource type="Script" uid="uid://dqethjbxw34li" path="res://GridInventory/grid_inventory.gd" id="1_fbr5j"]
+
+[node name="GridInventory" type="GridContainer" unique_id=1420619209]
+custom_minimum_size = Vector2(100, 100)
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 5
+script = ExtResource("1_fbr5j")

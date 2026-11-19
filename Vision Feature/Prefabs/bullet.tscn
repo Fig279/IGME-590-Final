@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cfkgqm8xcwdbi"]
+
+[ext_resource type="Script" uid="uid://ydlcuschr4vf" path="res://Scripts/bullet.gd" id="1_0oen4"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7dga7"]
+radius = 0.15
+height = 0.3
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0oen4"]
+
+[node name="Area3D" type="Area3D" unique_id=1899655826]
+script = ExtResource("1_0oen4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1419213501]
+mesh = SubResource("CapsuleMesh_7dga7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1846166314]
+shape = SubResource("SphereShape3D_0oen4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

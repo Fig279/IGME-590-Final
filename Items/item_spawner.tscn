@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cckwf7dribp41"]
+
+[ext_resource type="Script" uid="uid://bjp72idup0ool" path="res://Items/item_spawner.gd" id="1_malpt"]
+
+[node name="ItemSpawner" type="Button" unique_id=1897184407]
+offset_left = -2.0
+offset_top = -10.0
+offset_right = 168.0
+offset_bottom = 21.0
+text = "SpawnInventoryItem
+"
+script = ExtResource("1_malpt")
+
+[connection signal="pressed" from="." to="." method="_on_item_spawner_pressed"]

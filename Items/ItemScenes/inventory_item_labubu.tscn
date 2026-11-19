@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://ctm8thn5komk2"]
+
+[ext_resource type="Texture2D" uid="uid://c8qt1gj0bd3rh" path="res://Items/Sprites/Labubu.png" id="1_huyxb"]
+[ext_resource type="Script" uid="uid://d2k544ve34g6b" path="res://Items/inventory_item.gd" id="2_nb3nl"]
+
+[node name="InventoryItemLabubu" type="TextureRect" unique_id=451849844]
+visibility_layer = 2
+z_index = 2
+z_as_relative = false
+texture_filter = 1
+custom_minimum_size = Vector2(140, 140)
+custom_maximum_size = Vector2(140, 140)
+offset_right = 200.0
+offset_bottom = 300.0
+mouse_filter = 2
+texture = ExtResource("1_huyxb")
+script = ExtResource("2_nb3nl")
+shapeCells = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, 1), Vector2i(1, 0), Vector2i(1, 1)])

@@ -1,0 +1,162 @@
+[gd_scene format=3 uid="uid://desngahb4a2i6"]
+
+[ext_resource type="PackedScene" uid="uid://dubugoiufrev3" path="res://Vision Feature/Prefabs/character.tscn" id="1_xe1n4"]
+[ext_resource type="Script" uid="uid://cxeahpegwvslr" path="res://Vision Feature/Scripts/asset.gd" id="2_nwdoh"]
+[ext_resource type="PackedScene" uid="uid://ok1ik5xtxs4p" path="res://Vision Feature/Prefabs/asset.tscn" id="3_6cwgh"]
+[ext_resource type="Script" uid="uid://ckc88wf5o87r2" path="res://Vision Feature/Scripts/global.gd" id="3_lqecs"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1jp0p"]
+
+[sub_resource type="Sky" id="Sky_1jp0p"]
+sky_material = SubResource("ProceduralSkyMaterial_1jp0p")
+
+[sub_resource type="Environment" id="Environment_nwdoh"]
+background_mode = 2
+sky = SubResource("Sky_1jp0p")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nwdoh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bx7ya"]
+albedo_color = Color(1.35368e-07, 0.15541, 0.0361087, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lqecs"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lqecs"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1jp0p"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_sv0ua"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sv0ua"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ffy6a"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sv0ua"]
+
+[node name="Node3D" type="Node3D" unique_id=1205327606]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1327238868]
+transform = Transform3D(1, 0, 0, 0, 0.15471, 0.98796, 0, -0.98796, 0.15471, 0, 18.0061, 0)
+light_energy = 5.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2119923418]
+environment = SubResource("Environment_nwdoh")
+
+[node name="Ground" type="StaticBody3D" parent="." unique_id=1125128157]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=1128014522]
+transform = Transform3D(40.1279, 0, 0, 0, 1, 0, 0, 0, 49.2831, 0, 0, 0)
+shape = SubResource("BoxShape3D_nwdoh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=948945769]
+transform = Transform3D(40.2143, 0, 0, 0, 1, 0, 0, 0, 49.3424, -0.0272632, -0.0157387, 0.0158987)
+material_override = SubResource("StandardMaterial3D_bx7ya")
+mesh = SubResource("BoxMesh_lqecs")
+
+[node name="Character" parent="." unique_id=744799802 instance=ExtResource("1_xe1n4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0967979, 1.43269, -1.11977)
+
+[node name="Box" parent="." unique_id=1086998238 instance=ExtResource("3_6cwgh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.60941, 1.79078, -12.8194)
+
+[node name="Cylinder" type="StaticBody3D" parent="." unique_id=729828226]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.538726, 1.79078, -12.8194)
+script = ExtResource("2_nwdoh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cylinder" unique_id=385853302]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.228509, 0)
+material_overlay = SubResource("StandardMaterial3D_lqecs")
+mesh = SubResource("CylinderMesh_1jp0p")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cylinder" unique_id=1317570144]
+shape = SubResource("CylinderShape3D_sv0ua")
+
+[node name="Label3D" type="Label3D" parent="Cylinder" unique_id=1884315529]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.55584, 0)
+billboard = 1
+text = "Element will display here"
+font_size = 100
+outline_size = 20
+
+[node name="Rectangle" type="StaticBody3D" parent="." unique_id=387297691]
+transform = Transform3D(2.69764, 0, 0, 0, 1, 0, 0, 0, 1, -4.25559, 1.79078, -7.41448)
+script = ExtResource("2_nwdoh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Rectangle" unique_id=1411237525]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.228509, 0)
+material_overlay = SubResource("StandardMaterial3D_sv0ua")
+mesh = SubResource("BoxMesh_ffy6a")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rectangle" unique_id=1545574500]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.232266, 0)
+shape = SubResource("BoxShape3D_sv0ua")
+
+[node name="Label3D" type="Label3D" parent="Rectangle" unique_id=426648550]
+transform = Transform3D(0.45155, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3023, 0)
+billboard = 1
+text = "Element will display here"
+font_size = 100
+outline_size = 20
+
+[node name="Control" type="Control" parent="." unique_id=517210147]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VisionText" type="Label" parent="Control" unique_id=42330666]
+layout_mode = 0
+offset_left = 898.0
+offset_top = 15.0
+offset_right = 1148.0
+offset_bottom = 70.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 36
+text = "1"
+
+[node name="ChangeInstructions" type="Label" parent="Control" unique_id=1061979]
+layout_mode = 0
+offset_left = 898.0
+offset_top = 71.0
+offset_right = 1138.0
+offset_bottom = 144.0
+theme_override_colors/font_color = Color(6.01634e-09, 0.207447, 0.121258, 1)
+theme_override_font_sizes/font_size = 25
+text = "Press 1-7 to change 
+elemental bullet"
+
+[node name="ShootInstructions" type="Label" parent="Control" unique_id=1369210968]
+layout_mode = 0
+offset_left = 899.0
+offset_top = 148.0
+offset_right = 1149.0
+offset_bottom = 203.0
+theme_override_colors/font_color = Color(0.648114, 0.152984, 0.107945, 1)
+theme_override_font_sizes/font_size = 30
+text = "Press E to shoot"
+
+[node name="ElementText" type="Label" parent="Control" unique_id=134614885]
+layout_mode = 0
+offset_left = 464.0
+offset_top = 44.0
+offset_right = 728.0
+offset_bottom = 79.0
+theme_override_font_sizes/font_size = 25
+text = "Current Element Here"
+
+[node name="Crosshair" type="TextureRect" parent="Control" unique_id=152032420]
+layout_mode = 0
+offset_left = 575.0
+offset_top = 375.0
+offset_right = 625.0
+offset_bottom = 425.0
+expand_mode = 2
+
+[node name="Manager" type="Node3D" parent="." unique_id=1428366275]
+script = ExtResource("3_lqecs")
