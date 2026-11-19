@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cqow47bch5ocs"]
 
-[ext_resource type="PackedScene" uid="uid://cbd0u258mdnjk" path="res://GridInventory/grid_inventory.tscn" id="1_16enf"]
-[ext_resource type="Script" uid="uid://bfrrf1p7cpf8m" path="res://Grid Mechanic Others/player_manager.gd" id="2_s1vnj"]
-[ext_resource type="PackedScene" uid="uid://cckwf7dribp41" path="res://Items/item_spawner.tscn" id="3_w62cv"]
+[ext_resource type="PackedScene" uid="uid://cbd0u258mdnjk" path="res://GridInventory/grid_inventory.tscn" id="1_bulvh"]
+[ext_resource type="Script" uid="uid://bfrrf1p7cpf8m" path="res://Grid Mechanic Others/player_manager.gd" id="2_eyloo"]
+[ext_resource type="PackedScene" uid="uid://cckwf7dribp41" path="res://Items/item_spawner.tscn" id="3_xvyvr"]
 
 [node name="Control" type="Control" unique_id=2054121729]
 layout_mode = 3
@@ -19,7 +19,7 @@ anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
 
-[node name="GridInventory" parent="CenterContainer" unique_id=1420619209 node_paths=PackedStringArray("playerManagerInventory") instance=ExtResource("1_16enf")]
+[node name="GridInventory" parent="CenterContainer" unique_id=1420619209 node_paths=PackedStringArray("playerManagerInventory") instance=ExtResource("1_bulvh")]
 custom_minimum_size = Vector2(0, 0)
 layout_mode = 2
 theme_override_constants/h_separation = 0
@@ -31,10 +31,10 @@ spotSize = 70.0
 playerManagerInventory = NodePath("../../PlayerManager")
 
 [node name="PlayerManager" type="Node2D" parent="." unique_id=1135082606 node_paths=PackedStringArray("gridManager")]
-script = ExtResource("2_s1vnj")
+script = ExtResource("2_eyloo")
 gridManager = NodePath("../CenterContainer/GridInventory")
 
-[node name="ItemSpawner" parent="." unique_id=1897184407 node_paths=PackedStringArray("playerManager") instance=ExtResource("3_w62cv")]
+[node name="ItemSpawner" parent="." unique_id=1897184407 node_paths=PackedStringArray("playerManager") instance=ExtResource("3_xvyvr")]
 layout_mode = 0
 offset_left = 491.0
 offset_top = 500.0

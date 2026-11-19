@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://desngahb4a2i6"]
 
-[ext_resource type="PackedScene" uid="uid://dubugoiufrev3" path="res://Vision Feature/Prefabs/character.tscn" id="1_xe1n4"]
-[ext_resource type="Script" uid="uid://cxeahpegwvslr" path="res://Vision Feature/Scripts/asset.gd" id="2_nwdoh"]
-[ext_resource type="PackedScene" uid="uid://ok1ik5xtxs4p" path="res://Vision Feature/Prefabs/asset.tscn" id="3_6cwgh"]
-[ext_resource type="Script" uid="uid://ckc88wf5o87r2" path="res://Vision Feature/Scripts/global.gd" id="3_lqecs"]
+[ext_resource type="PackedScene" uid="uid://cqow47bch5ocs" path="res://Grid Mechanic Others/Inventory.tscn" id="1_kk76q"]
+[ext_resource type="PackedScene" uid="uid://dubugoiufrev3" path="res://Vision Feature/Prefabs/character.tscn" id="2_qepfx"]
+[ext_resource type="PackedScene" uid="uid://ok1ik5xtxs4p" path="res://Vision Feature/Prefabs/asset.tscn" id="3_impmk"]
+[ext_resource type="Script" uid="uid://cxeahpegwvslr" path="res://Vision Feature/Scripts/asset.gd" id="4_yki1d"]
+[ext_resource type="Script" uid="uid://ckc88wf5o87r2" path="res://Vision Feature/Scripts/global.gd" id="5_hg44v"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1jp0p"]
 
@@ -39,6 +40,9 @@ albedo_color = Color(1, 1, 1, 0)
 
 [node name="Node3D" type="Node3D" unique_id=1205327606]
 
+[node name="Control2" parent="." unique_id=2054121729 instance=ExtResource("1_kk76q")]
+visible = false
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1327238868]
 transform = Transform3D(1, 0, 0, 0, 0.15471, 0.98796, 0, -0.98796, 0.15471, 0, 18.0061, 0)
 light_energy = 5.0
@@ -57,15 +61,16 @@ transform = Transform3D(40.2143, 0, 0, 0, 1, 0, 0, 0, 49.3424, -0.0272632, -0.01
 material_override = SubResource("StandardMaterial3D_bx7ya")
 mesh = SubResource("BoxMesh_lqecs")
 
-[node name="Character" parent="." unique_id=744799802 instance=ExtResource("1_xe1n4")]
+[node name="Character" parent="." unique_id=744799802 node_paths=PackedStringArray("pauseMenu") instance=ExtResource("2_qepfx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0967979, 1.43269, -1.11977)
+pauseMenu = NodePath("../Control2")
 
-[node name="Box" parent="." unique_id=1086998238 instance=ExtResource("3_6cwgh")]
+[node name="Box" parent="." unique_id=1086998238 instance=ExtResource("3_impmk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.60941, 1.79078, -12.8194)
 
 [node name="Cylinder" type="StaticBody3D" parent="." unique_id=729828226]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.538726, 1.79078, -12.8194)
-script = ExtResource("2_nwdoh")
+script = ExtResource("4_yki1d")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Cylinder" unique_id=385853302]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.228509, 0)
@@ -85,7 +90,7 @@ outline_size = 20
 
 [node name="Rectangle" type="StaticBody3D" parent="." unique_id=387297691]
 transform = Transform3D(2.69764, 0, 0, 0, 1, 0, 0, 0, 1, -4.25559, 1.79078, -7.41448)
-script = ExtResource("2_nwdoh")
+script = ExtResource("4_yki1d")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Rectangle" unique_id=1411237525]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.228509, 0)
@@ -159,4 +164,6 @@ offset_bottom = 425.0
 expand_mode = 2
 
 [node name="Manager" type="Node3D" parent="." unique_id=1428366275]
-script = ExtResource("3_lqecs")
+script = ExtResource("5_hg44v")
+
+[connection signal="toggle_paused" from="Character" to="Manager" method="_on_character_toggle_paused"]

@@ -13,6 +13,12 @@ var label: Label
 
 const bulletPrefab = preload("res://Vision Feature/Prefabs/bullet.tscn")
 
+# pause menu fields
+@export var pauseMenu : Control
+var isPaused: bool = false
+
+signal toggle_paused(isPaused: bool)
+
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
@@ -27,9 +33,9 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor() and !isPaused:
 		velocity.y = JUMP_VELOCITY
-
+	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("left", "right", "up", "down")
@@ -40,13 +46,11 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-	
-	# Close the game when pause is pressed
-	if Input.is_action_just_pressed("pause"):
-		get_tree().quit()
-	
-	_rotate_camera(delta)
-	move_and_slide()
+
+
+	if !isPaused:
+		_rotate_camera(delta)
+		move_and_slide()
 
 func _input(event: InputEvent):
 	if event is InputEventMouseMotion: look_dir = event.relative * 0.01
@@ -59,6 +63,26 @@ func _rotate_camera(delta: float, sens_mod: float = 1.0):
 	
 # Handling gameplay inputs
 func _unhandled_input(event: InputEvent) -> void:
+	
+	# Toggle Pause when pause is pressed
+	if Input.is_action_just_pressed("pause"):
+		pauseMenu.visible = !pauseMenu.visible 
+		isPaused = pauseMenu.visible
+		
+		emit_signal("toggle_paused", isPaused)
+		
+		# show cursor if pausing
+		if isPaused:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		# hide cursor if unpasuing
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		
+	
+	# if the player is paused, ignore other input
+	if isPaused:
+		return
+	
 	# Swap elements is numbers 1 to 7 is pressed
 	if event.is_action_pressed("swap"):
 		# The keycode of the number keys 1 to 9 is the number plus 48. ex: 1 is keycode 49
@@ -72,6 +96,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if element.currentState == Element.State.Neutral: # Can't shoot physical bullets
 			return
 		shoot_bullet(element)
+	
 
 # Display the player's current element
 func display_element() -> void:
