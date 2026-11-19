@@ -39,9 +39,6 @@ albedo_color = Color(1, 1, 1, 0)
 
 [node name="Node3D" type="Node3D" unique_id=1205327606]
 
-[node name="Inventory" parent="." unique_id=2054121729 instance=ExtResource("1_kk76q")]
-visible = false
-
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1327238868]
 transform = Transform3D(1, 0, 0, 0, 0.15471, 0.98796, 0, -0.98796, 0.15471, 0, 18.0061, 0)
 light_energy = 5.0
@@ -161,3 +158,6 @@ offset_top = 375.0
 offset_right = 625.0
 offset_bottom = 425.0
 expand_mode = 2
+
+[node name="Inventory" parent="." unique_id=2054121729 instance=ExtResource("1_kk76q")]
+visible = false
