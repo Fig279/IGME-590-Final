@@ -31,14 +31,14 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	# Toggle vision mode
-	if Input.is_action_just_pressed("vision"):
+	if Input.is_action_just_pressed("vision") and !Global.isPaused:
 		elementalVision()
 	pass
 
 # Toggle vision mode
 func elementalVision():
 	# Make hidden information visible when entering vision mode
-	if !$"../Manager".vision:
+	if Global.vision:
 		update_information()
 		label.visible = true
 		

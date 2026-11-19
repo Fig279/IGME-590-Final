@@ -6,7 +6,7 @@ var label: Label
 var isPaused: bool = false
 
 func _ready() -> void:
-	label = $"../Control/VisionText"
+	label = $"/root/Node3D/Control/VisionText"
 	label.text = "Vision: %s" % vision
 	
 func _process(delta: float) -> void:
@@ -18,3 +18,4 @@ func _process(delta: float) -> void:
 
 func _on_character_toggle_paused(_isPaused: bool) -> void:
 	isPaused = _isPaused
+	print(isPaused)

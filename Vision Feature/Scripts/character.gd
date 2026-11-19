@@ -26,6 +26,8 @@ func _ready() -> void:
 	element.currentState = Element.State.Neutral
 	label = $"../Control/ElementText"
 	label.modulate.a = 0 # Make it invisible
+	
+	toggle_paused.connect(Global._on_character_toggle_paused)
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.

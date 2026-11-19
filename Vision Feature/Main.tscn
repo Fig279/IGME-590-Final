@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://dubugoiufrev3" path="res://Vision Feature/Prefabs/character.tscn" id="2_qepfx"]
 [ext_resource type="PackedScene" uid="uid://ok1ik5xtxs4p" path="res://Vision Feature/Prefabs/asset.tscn" id="3_impmk"]
 [ext_resource type="Script" uid="uid://cxeahpegwvslr" path="res://Vision Feature/Scripts/asset.gd" id="4_yki1d"]
-[ext_resource type="Script" uid="uid://ckc88wf5o87r2" path="res://Vision Feature/Scripts/global.gd" id="5_hg44v"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1jp0p"]
 
@@ -40,7 +39,7 @@ albedo_color = Color(1, 1, 1, 0)
 
 [node name="Node3D" type="Node3D" unique_id=1205327606]
 
-[node name="Control2" parent="." unique_id=2054121729 instance=ExtResource("1_kk76q")]
+[node name="Inventory" parent="." unique_id=2054121729 instance=ExtResource("1_kk76q")]
 visible = false
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1327238868]
@@ -63,7 +62,7 @@ mesh = SubResource("BoxMesh_lqecs")
 
 [node name="Character" parent="." unique_id=744799802 node_paths=PackedStringArray("pauseMenu") instance=ExtResource("2_qepfx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0967979, 1.43269, -1.11977)
-pauseMenu = NodePath("../Control2")
+pauseMenu = NodePath("../Inventory")
 
 [node name="Box" parent="." unique_id=1086998238 instance=ExtResource("3_impmk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.60941, 1.79078, -12.8194)
@@ -162,8 +161,3 @@ offset_top = 375.0
 offset_right = 625.0
 offset_bottom = 425.0
 expand_mode = 2
-
-[node name="Manager" type="Node3D" parent="." unique_id=1428366275]
-script = ExtResource("5_hg44v")
-
-[connection signal="toggle_paused" from="Character" to="Manager" method="_on_character_toggle_paused"]

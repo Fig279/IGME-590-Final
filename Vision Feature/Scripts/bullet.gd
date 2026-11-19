@@ -31,7 +31,7 @@ func _on_body_entered(body: Node3D) -> void:
 	if body is Asset:
 		body.change_element(element)
 		
-		if $"../Manager".vision:
+		if Global.vision:
 			body.update_information()
 
 	queue_free()
