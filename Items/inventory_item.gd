@@ -38,3 +38,42 @@ func RotateShapeCells():
 		shapeCells[i].x = currentCoordinate.y * -1
 		shapeCells[i].y = currentCoordinate.x
 	
+# Create the texture for the item
+func genetate_texture() -> void:
+	var image: Image = preload("res://Items/Sprites/box.png").get_image()
+	var cellSize = 70
+	var numberOfCells = shapeCells.size()
+	var imageSize: Vector2 = get_image_size()
+	print(imageSize)
+	
+	var finalImage = Image.create(imageSize.x, imageSize.y, false,Image.FORMAT_RGBA8)
+	
+	#finalImage.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
+	#finalImage.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i(70, 0))
+	for i in range(0, shapeCells.size()):
+		var x = shapeCells[i].x * cellSize
+		var y = shapeCells[i].y * cellSize
+		
+		finalImage.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i(x, y))
+	
+	custom_maximum_size = finalImage.get_size()
+	custom_minimum_size = finalImage.get_size()
+	size = finalImage.get_size()
+	self.texture = ImageTexture.create_from_image(finalImage)
+
+func get_image_size() -> Vector2:
+	var returnVector: Vector2 = Vector2.ZERO
+	
+	for i in range(0, shapeCells.size()):
+		if shapeCells[i].x > returnVector.x:
+			returnVector.x = shapeCells[i].x
+		
+		if shapeCells[i].y > returnVector.y:
+			returnVector.y = shapeCells[i].y
+	
+	returnVector.x += 1
+	returnVector.x *= 70
+	returnVector.y += 1
+	returnVector.y *= 70
+	
+	return returnVector
