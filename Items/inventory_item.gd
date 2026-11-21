@@ -38,32 +38,68 @@ func RotateShapeCells():
 		shapeCells[i].x = currentCoordinate.y * -1
 		shapeCells[i].y = currentCoordinate.x
 	
-# Create the texture for the item
+# Create the texture for the item by putting multiple instances of the box image
+# based on the shapeCell
 func genetate_texture() -> void:
+	# Setting up
 	var image: Image = preload("res://Items/Sprites/box.png").get_image()
 	var cellSize = 70
+	
+	# THIS IS WHERE YOU GENERATE THE SHAPE
+	shapeCells = generate_shape_cell(3)
+	
 	var numberOfCells = shapeCells.size()
 	var imageSize: Vector2 = get_image_size()
 	print(imageSize)
 	
+	# Create the image where all the squares will be stored
 	var finalImage = Image.create(imageSize.x, imageSize.y, false,Image.FORMAT_RGBA8)
 	
-	#finalImage.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i.ZERO)
-	#finalImage.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i(70, 0))
+	# Place the boxes in the new texture
 	for i in range(0, shapeCells.size()):
 		var x = shapeCells[i].x * cellSize
 		var y = shapeCells[i].y * cellSize
 		
 		finalImage.blit_rect(image, Rect2i(Vector2i.ZERO, image.get_size()), Vector2i(x, y))
 	
+	# Messing with the size because it won't work otherwise
 	custom_maximum_size = finalImage.get_size()
 	custom_minimum_size = finalImage.get_size()
 	size = finalImage.get_size()
+	
+	# Make the new image with all the boxes the new texture
 	self.texture = ImageTexture.create_from_image(finalImage)
 
+func generate_shape_cell(number: int) -> Array[Vector2i]:
+	var newShape: Array[Vector2i]
+	
+	match number:
+		# Vertical line
+		1:
+			newShape.append(Vector2i(0, 0))
+			newShape.append(Vector2i(0, 1))
+		
+		# Horizontal line
+		2:
+			newShape.append(Vector2i(0, 0))
+			newShape.append(Vector2i(1, 0))
+		
+		# L shape
+		3:
+			newShape.append(Vector2i(0, 0))
+			newShape.append(Vector2i(0, 1))
+			newShape.append(Vector2i(1, 1))
+		# Single cell
+		_: 
+			newShape.append(Vector2i(0, 0))
+	
+	return newShape
+# Returns the size of new image based on the cell positioning.
+# Similar to how collision boxes are generated
 func get_image_size() -> Vector2:
 	var returnVector: Vector2 = Vector2.ZERO
 	
+	# Get the furthest x and y value by going through every cell
 	for i in range(0, shapeCells.size()):
 		if shapeCells[i].x > returnVector.x:
 			returnVector.x = shapeCells[i].x
@@ -71,6 +107,8 @@ func get_image_size() -> Vector2:
 		if shapeCells[i].y > returnVector.y:
 			returnVector.y = shapeCells[i].y
 	
+	# Adding 1 because arrays start counting from 0.
+	# Multiply by the size of one cell
 	returnVector.x += 1
 	returnVector.x *= 70
 	returnVector.y += 1

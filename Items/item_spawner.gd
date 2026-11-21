@@ -11,11 +11,13 @@ const elementalItem = preload("res://Items/ItemScenes/inventory_elemental_item.t
 func _on_item_spawner_pressed() -> void:
 	if playerManager.heldItem == null:
 		
+		var newItem = inventoryItems[randi_range(0, inventoryItems.size() - 1)].instantiate()
+		playerManager.PickupSpawnedItem(newItem)
+
+func _on_elemental_spawner_press() -> void:
+	if playerManager.heldItem == null:
+		
 		#var newItem = inventoryItems[randi_range(0, inventoryItems.size() - 1)].instantiate()
 		var newItem = elementalItem.instantiate()
 		newItem.genetate_texture()
 		playerManager.PickupSpawnedItem(newItem)
-
-func elemental_item_spawn() -> void:
-	
-	pass

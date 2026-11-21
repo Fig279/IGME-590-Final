@@ -36,8 +36,20 @@ gridManager = NodePath("../CenterContainer/GridInventory")
 
 [node name="ItemSpawner" parent="." unique_id=1897184407 node_paths=PackedStringArray("playerManager") instance=ExtResource("3_xvyvr")]
 layout_mode = 0
-offset_left = 491.0
-offset_top = 500.0
-offset_right = 661.0
-offset_bottom = 531.0
+offset_left = 362.0
+offset_top = 503.0
+offset_right = 532.0
+offset_bottom = 534.0
 playerManager = NodePath("../PlayerManager")
+
+[node name="ItemSpawner2" parent="." unique_id=2118370711 node_paths=PackedStringArray("playerManager") instance=ExtResource("3_xvyvr")]
+layout_mode = 0
+offset_left = 706.0
+offset_top = 505.0
+offset_right = 879.0
+offset_bottom = 536.0
+text = "SpawnElementalItem
+"
+playerManager = NodePath("../PlayerManager")
+
+[connection signal="button_down" from="ItemSpawner2" to="ItemSpawner2" method="_on_elemental_spawner_press"]
