@@ -8,6 +8,12 @@ var value: int
 var overlay: StandardMaterial3D # This is the material where the color will display
 var label: Label3D # Label that contains the asset's information
 
+var reactionElement : Element.State = Element.new().State.Fire
+
+# The small pickup version 
+@export var drop_scene: PackedScene          
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	element.currentState = randi_range(0, 7) # Randomize element
@@ -51,6 +57,10 @@ func elementalVision():
 func change_element(newElement: Element):
 	element.currentState = newElement.currentState
 	
+	# if we just changed to reaction element, react by breaking
+	if reactionElement == element.currentState:
+		break_object()
+	
 # Update the material and label information
 func update_information():
 	# Changing the color of the material overlay
@@ -61,3 +71,18 @@ func update_information():
 	text += "Element: %s \n" % Element.State.keys()[element.currentState]
 	text += "Value: %s" % value
 	label.text = text
+
+
+## Spawns the inventory object and destroys this object.
+func break_object() -> void:
+	if drop_scene == null:
+		push_warning("%s has no drop_scene assigned." % name)
+		queue_free()
+		return
+
+	var world := get_tree().current_scene
+	var drop := drop_scene.instantiate() as PickupItem
+	world.add_child(drop)  
+	drop.global_position = global_position 
+	
+	queue_free()

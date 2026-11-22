@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dnod4jmndt3f"]
+
+[ext_resource type="Script" uid="uid://c3sqe628cx65s" path="res://pickup_item.gd" id="1_2vssv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fr8n6"]
+size = Vector3(0.4, 0.4, 0.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fr8n6"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_a672s"]
+radius = 1.5385076
+
+[node name="pickup_item" type="RigidBody3D" unique_id=74040495]
+script = ExtResource("1_2vssv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=372178129]
+shape = SubResource("BoxShape3D_fr8n6")
+
+[node name="Visual" type="Node3D" parent="." unique_id=1950574423]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Visual" unique_id=1641717664]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+mesh = SubResource("BoxMesh_fr8n6")
+
+[node name="PickupArea" type="Area3D" parent="." unique_id=924826285]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickupArea" unique_id=23066663]
+shape = SubResource("SphereShape3D_a672s")
