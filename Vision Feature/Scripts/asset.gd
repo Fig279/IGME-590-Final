@@ -8,7 +8,7 @@ var value: int
 var overlay: StandardMaterial3D # This is the material where the color will display
 var label: Label3D # Label that contains the asset's information
 
-var reactionElement : Element.State = Element.new().State.Fire
+@export var reactionElement : Element.State = Element.new().State.Fire
 
 # The small pickup version 
 @export var drop_scene: PackedScene          

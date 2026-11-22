@@ -68,6 +68,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.60941, 1.79078, -12.8194)
 [node name="Cylinder" type="StaticBody3D" parent="." unique_id=729828226]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.538726, 1.79078, -12.8194)
 script = ExtResource("4_yki1d")
+reactionElement = 3
 drop_scene = ExtResource("4_kk76q")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Cylinder" unique_id=385853302]
