@@ -85,4 +85,7 @@ func break_object() -> void:
 	world.add_child(drop)  
 	drop.global_position = global_position 
 	
+	# Pass this asset's information on to the pickup
+	drop.set_values(element, assetName, value)
+	
 	queue_free()

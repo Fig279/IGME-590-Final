@@ -18,6 +18,13 @@ extends RigidBody3D
 @export var spin_speed: float = 1.5             
 
 @onready var visual: Node3D = $Visual
+@onready var mesh: MeshInstance3D = $Visual/MeshInstance3D
+@onready var label: Label3D = $Label3D # Label that contains the pickup's information
+
+var element: Element = Element.new()
+var assetName: String
+var value: int
+var overlay: StandardMaterial3D # This is the material where the color will display
 
 var _time: float = 0.0
 
@@ -30,6 +37,17 @@ func _ready() -> void:
 	axis_lock_angular_y = true
 	axis_lock_angular_z = true
 	
+	# Initialize the information and making it invisible
+	label.visible = false
+	
+	# Creating the overlay
+	overlay = StandardMaterial3D.new()
+	
+	# Setting the transparency of this material to be the same as the alpha of the albedo_color
+	overlay.albedo_color = Color(0, 0, 0, 0)
+	overlay.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	
+	mesh.material_overlay = overlay
 	
 	pickup_area.monitoring = false
 	pickup_area.body_entered.connect(_on_body_entered)
@@ -41,6 +59,43 @@ func _process(delta: float) -> void:
 	_time += delta
 	visual.rotate_y(spin_speed * delta)
 	visual.position.y = hover_height + sin(_time * bob_speed) * bob_amount
+	
+	# Toggle vision mode
+	if Input.is_action_just_pressed("vision") and !Global.isPaused:
+		elementalVision()
+
+# Called by the Asset that dropped this pickup so it keeps the same information
+func set_values(newElement: Element, newName: String, newValue: int) -> void:
+	element.currentState = newElement.currentState
+	assetName = newName
+	value = newValue
+	
+	# If vision is already on when this is dropped, show the information right away
+	if Global.vision:
+		elementalVision()
+
+# Toggle vision mode
+func elementalVision():
+	# Make hidden information visible when entering vision mode
+	if Global.vision:
+		update_information()
+		label.visible = true
+		
+	# Hide information when leaving vision mode
+	else:
+		overlay.albedo_color = Color(0, 0, 0, 0)
+		label.visible = false
+
+# Update the material and label information
+func update_information():
+	# Changing the color of the material overlay
+	overlay.albedo_color = element.get_color()
+		
+	# Making label information
+	var text = "Name: %s \n" % assetName
+	text += "Element: %s \n" % Element.State.keys()[element.currentState]
+	text += "Value: %s" % value
+	label.text = text
 
 func _enable_pickup() -> void:
 	pickup_area.monitoring = true

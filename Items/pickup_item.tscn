@@ -26,3 +26,8 @@ mesh = SubResource("BoxMesh_fr8n6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PickupArea" unique_id=23066663]
 shape = SubResource("SphereShape3D_a672s")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1137469584]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1135497, 0)
+billboard = 1
+text = "Element will display here"
