@@ -194,3 +194,17 @@ func PickupItem(item: InventoryItem):
 		gridSpots[spot.x][spot.y].itemInside = null
 	
 	CheckIfItemCanBePlaced(gridSpots[playerManagerInventory.focusedSpot.column][playerManagerInventory.focusedSpot.row], item)
+
+# Call this when an item's stack reaches 0 while placed on the grid
+func RemoveItemFromGrid(item: InventoryItem) -> void:
+	if item == null:
+		return
+	
+	if item.anchorSpot.x >= 0 and item.anchorSpot.y >= 0:
+		var occupied_spots: Array[Vector2i] = FindNeededSpots(gridSpots[item.anchorSpot.x][item.anchorSpot.y], item)
+		for spot in occupied_spots:
+			if spot.x >= 0 and spot.y >= 0 and spot.x < gridWidth and spot.y < gridHeight:
+				if gridSpots[spot.x][spot.y].itemInside == item:
+					gridSpots[spot.x][spot.y].itemInside = null
+	
+	item.queue_free()

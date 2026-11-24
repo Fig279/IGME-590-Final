@@ -7,12 +7,20 @@ class_name InventoryItem
 # grid spot that the top left of this item occupies
 var anchorSpot : Vector2i = Vector2i(-99, -99)
 
+@export var is_ammo: bool = false
+@export var stack_count: int = 1
+@export var max_stack: int = 99
+
+var count_label: Label
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	custom_minimum_size = size
-	
 	CenterPivot()
-
+	
+	#FIG Optional: if you attach a Label child named "StackLabel" in the scene, update it
+	count_label = get_node_or_null("StackLabel")
+	update_stack_display()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -115,3 +123,28 @@ func get_image_size() -> Vector2:
 	returnVector.y *= 70
 	
 	return returnVector
+
+#region Stacking Items Logic
+
+func update_stack_display() -> void:
+	if count_label != null:
+		count_label.visible = is_ammo and stack_count > 0
+		count_label.text = str(stack_count)
+
+func add_to_stack(amount: int) -> int:
+	if amount <= 0:
+		return 0
+	var space_left := max_stack - stack_count
+	var added := mini(space_left, amount)
+	stack_count += added
+	update_stack_display()
+	return amount - added # returns any remainder that didn't fit
+
+func consume_one() -> bool:
+	if stack_count <= 0:
+		return false
+	stack_count -= 1
+	update_stack_display()
+	return true
+
+#endregion

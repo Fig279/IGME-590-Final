@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cg6cjp7ysgfod"]
 
 [ext_resource type="Script" uid="uid://d2k544ve34g6b" path="res://Items/inventory_item.gd" id="1_5b765"]
-[ext_resource type="Texture2D" uid="uid://cc7it1deq4vdx" path="res://Items/Sprites/bunny.png" id="1_gmchj"]
+[ext_resource type="Texture2D" uid="uid://cjmi2iif6yvmx" path="res://icon.svg" id="1_x2hvo"]
 
 [node name="InventoryItem" type="TextureRect" unique_id=451849844]
 visibility_layer = 2
@@ -12,7 +12,17 @@ custom_minimum_size = Vector2(100, 100)
 custom_maximum_size = Vector2(100, 100)
 offset_right = 80.0
 mouse_filter = 2
-texture = ExtResource("1_gmchj")
+texture = ExtResource("1_x2hvo")
 expand_mode = 2
 script = ExtResource("1_5b765")
 shapeCells = Array[Vector2i]([Vector2i(0, 0), Vector2i(1, 0)])
+
+[node name="StackLabel" type="Label" parent="." unique_id=733989627]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 8.0
+offset_right = 40.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color(0, 0.15294118, 0, 1)
+theme_override_constants/line_spacing = 0
+text = "5"

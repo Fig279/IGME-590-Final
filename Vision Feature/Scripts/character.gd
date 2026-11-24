@@ -97,6 +97,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("shoot"):
 		if element.currentState == Element.State.Neutral: # Can't shoot physical bullets
 			return
+		
+		var inv := PlayerManagerInventory.playerManagerInventory
+		if inv == null or not inv.has_ammo():
+			print("Out of ammo!")
+			return
+		
 		shoot_bullet(element)
 	
 
@@ -108,6 +114,10 @@ func display_element() -> void:
 
 # Generate the bullet
 func shoot_bullet(element: Element):
+	var inv := PlayerManagerInventory.playerManagerInventory
+	if inv == null or not inv.consume_ammo():
+		return
+	
 	# Instantiate bullet and shoot it forward
 	var newBullet = bulletPrefab.instantiate()
 	newBullet.set_values(element, -camera.global_basis.z, self.global_position + (-camera.global_basis.z * 1))
