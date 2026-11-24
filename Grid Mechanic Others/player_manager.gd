@@ -121,7 +121,7 @@ func consume_ammo() -> bool:
 	if not spent:
 		return false
 	
-	# If stack is depleted, remove from grid (or clear held item)
+	# If stack is depleted, remove from grid 
 	if ammo_item.stack_count <= 0:
 		if heldItem == ammo_item:
 			heldItem = null

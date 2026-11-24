@@ -18,7 +18,7 @@ func _ready() -> void:
 	custom_minimum_size = size
 	CenterPivot()
 	
-	#FIG Optional: if you attach a Label child named "StackLabel" in the scene, update it
+	# if you attach a Label child named "StackLabel" in the scene, update it
 	count_label = get_node_or_null("StackLabel")
 	update_stack_display()
 
